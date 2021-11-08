@@ -1,15 +1,10 @@
 
-
-
 const Kingdom = ({ kingdomStats }) => {
-    
+  return (
+    <>
 
-    return (
-        <>
-        
-        </>
-        );
-};
+    </>
+  )
+}
 
-
-export default Kingdom;
+export default Kingdom

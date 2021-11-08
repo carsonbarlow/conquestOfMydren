@@ -19,7 +19,7 @@ ol, ul {
 
 
 
-.territory_img {
+.territory-img {
     position: absolute;
 }
 
@@ -81,7 +81,7 @@ ol, ul {
 }
 
 
-#game_board {
+#game-board {
     position: absolute;
     top: 5%;
     left: 5%;

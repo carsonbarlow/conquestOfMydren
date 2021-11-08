@@ -1,17 +1,15 @@
 
-import Territory from '../game-components/territory.js';
-
+import Territory from '../game-components/territory.js'
 
 const Board = ({ territories }) => {
-    return (
-        <>
-            <div id='game_board'>
-                {territories.map((territory) => <Territory stats={territory} key={territory.id} />)}
-            </div>
-        
-        </>
-        );
-};
+  return (
+    <>
+      <div id='game-board'>
+        {territories.map((territory) => <Territory stats={territory} key={territory.id} />)}
+      </div>
 
+    </>
+  )
+}
 
-export default Board;
+export default Board

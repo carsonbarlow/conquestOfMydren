@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const { ignatius, taranis, lucasta, glyndwr, demeter, melanthios, games, kingdoms, territories } = require('./test-data.js');
+const { ignatius, taranis, lucasta, glyndwr, demeter, melanthios, games, kingdoms, territories } = require('./test-data.js')
 
-//============ Query Compolations ============\\
+//= =========== Query Compolations ============\\
 
 const resetUsersTableQuery = `
     DROP TABLE IF EXISTS users;
@@ -22,7 +22,7 @@ const resetGamesTableQuery = `
     turn_number int,
     PRIMARY KEY (id)
     );
-    INSERT INTO games(id, players, turn_number) VALUES ${games.map(game => `('${game.id}', array[${game.players}], ${game.turn_number})`).join(',')};`;
+    INSERT INTO games(id, players, turn_number) VALUES ${games.map(game => `('${game.id}', array[${game.players}], ${game.turn_number})`).join(',')};`
 
 const resetKingdomsTableQuery = `
     DROP TABLE IF EXISTS kingdoms;
@@ -44,7 +44,7 @@ const resetKingdomsTableQuery = `
     gold_production int,
     PRIMARY KEY (id)
     );
-    INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdom => `('${kingdom.id}','${kingdom.game_id}','${kingdom.user_id}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workers_total}, ${kingdom.workers_reserve}, ${kingdom.solders_total}, ${kingdom.solders_reserve}, ${kingdom.food_production}, ${kingdom.wood_production}, ${kingdom.stone_production}, ${kingdom.gold_production})`).join(',')};`;
+    INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdom => `('${kingdom.id}','${kingdom.game_id}','${kingdom.user_id}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workers_total}, ${kingdom.workers_reserve}, ${kingdom.solders_total}, ${kingdom.solders_reserve}, ${kingdom.food_production}, ${kingdom.wood_production}, ${kingdom.stone_production}, ${kingdom.gold_production})`).join(',')};`
 
 const resetTerritoriesTableQuery = `
     DROP TABLE IF EXISTS territories;
@@ -58,7 +58,7 @@ const resetTerritoriesTableQuery = `
     buildings text ARRAY,
     PRIMARY KEY (id)
     );
-    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.game_id}','${territory.kingdom_id}', ${territory.stat_ID}, ${territory.position}, ${territory.army_id}, ${territory.buildings})`).join(',')};`;
+    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.game_id}','${territory.kingdom_id}', ${territory.stat_ID}, ${territory.position}, ${territory.army_id}, ${territory.buildings})`).join(',')};`
 
 const resetArmiesTable = `
     DROP TABLE IF EXISTS armies;
@@ -78,7 +78,7 @@ const resetArmiesTable = `
     shadow_swords int,
     shadow_armors int,
     PRIMARY KEY (id)
-    );`;
+    );`
 
 const resetHerosTable = `
     DROP TABLE IF EXISTS heros;
@@ -90,7 +90,7 @@ const resetHerosTable = `
     army_id varchar (36),
     building_id varchar (36),
     PRIMARY KEY (id)
-    );`;
+    );`
 
 const resetBuildingsTable = `
     DROP TABLE IF EXISTS buildings;
@@ -100,47 +100,45 @@ const resetBuildingsTable = `
     territory_id varchar(36),
     occupancy int,
     PRIMARY KEY (id)
-    );`;
+    );`
 
-const resetDBTables = [resetUsersTableQuery, resetGamesTableQuery, resetKingdomsTableQuery, resetTerritoriesTableQuery, resetArmiesTable, resetHerosTable, resetBuildingsTable].join('');
+const resetDBTables = [resetUsersTableQuery, resetGamesTableQuery, resetKingdomsTableQuery, resetTerritoriesTableQuery, resetArmiesTable, resetHerosTable, resetBuildingsTable].join('')
 
-//const selectKingdomQuery = (kingdomId) => `
+// const selectKingdomQuery = (kingdomId) => `
 //    SELECT * FROM kingdoms
 //    WHERE id = '${kingdomId}';
-//`;
+// `;
 
-
-//const selectTerritoriesQuery = (gameId) => `
+// const selectTerritoriesQuery = (gameId) => `
 //    SELECT * from territories
 //    WHERE game_id = '${gameId}';
-//`;
+// `;
 
-
-const kingdomMapId = kingdom => `'${kingdom.id}'`;
-const kingdomMapFullRow = kingdom => `('${kingdom.id}','${kingdom.game_id}','${kingdom.user_id}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workers_total}, ${kingdom.workers_reserve}, ${kingdom.solders_total}, ${kingdom.solders_reserve}, ${kingdom.food_production}, ${kingdom.wood_production}, ${kingdom.stone_production}, ${kingdom.gold_production})`;
+const kingdomMapId = kingdom => `'${kingdom.id}'`
+const kingdomMapFullRow = kingdom => `('${kingdom.id}','${kingdom.game_id}','${kingdom.user_id}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workers_total}, ${kingdom.workers_reserve}, ${kingdom.solders_total}, ${kingdom.solders_reserve}, ${kingdom.food_production}, ${kingdom.wood_production}, ${kingdom.stone_production}, ${kingdom.gold_production})`
 const newGameQuery = ({ id, kingdoms, territories, turn }) => `
     INSERT INTO games(id, players, turn_number) VALUES ('${id}', array[${kingdoms.map(kingdomMapId)}], ${turn});
     INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdomMapFullRow).join(',')};
     INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.game_id}','${territory.kingdom_id}', ${territory.stat_ID}, ${territory.position}, ${territory.army_id}, ${territory.buildings})`).join(',')};
-`;
+`
 
 const selectKingdomsWithGameIdQuery = ({ id }) => `
     SELECT * from kingdoms
     WHERE game_id = '${id}';
-`;
+`
 
 const selectTerritoriesWithGameIdQuery = ({ id }) => `
     SELECT * from territories
     WHERE game_id = '${id}';
-`;
+`
 
 const selectTurnFromGamesQuery = ({ id }) => `
     SELECT turn_number from games
     WHERE id = '${id}';
-`;
+`
 
 const updateKingdomsQuery = kingdoms => {
-    return kingdoms.map(kingdom => `
+  return kingdoms.map(kingdom => `
         UPDATE kingdoms
         SET food = ${kingdom.food},
         wood = ${kingdom.wood},
@@ -155,41 +153,41 @@ const updateKingdomsQuery = kingdoms => {
         stone_production = ${kingdom.stone_production},
         gold_production = ${kingdom.gold_production}
         WHERE id = '${kingdom.id}';
-    `).join('');
-};
+    `).join('')
+}
 
 const updateTerritoriesQuery = territories => {
-    return territories.map(territory => `
+  return territories.map(territory => `
         UPDATE territories
         SET kingdom_id = '${territory.kingdom_id}',
         army_id = '${territory.army_id}',
         buildings = ${territory.buildings}
         WHERE id = '${territory.id}';
-    `).join('');
-};
+    `).join('')
+}
 
 const updateGameTurnQuery = game => `
     UPDATE games
     SET turn_number = ${game.turn_number}
     WHERE id = '${game.id}';
-`;
+`
 
 module.exports = {
-    //selectKingdomQuery,
-    //selectTerritoriesQuery,
-    resetDBTables,
-    resetUsersTableQuery,
-    resetGamesTableQuery,
-    resetKingdomsTableQuery,
-    resetTerritoriesTableQuery,
-    resetArmiesTable,
-    resetHerosTable,
-    resetBuildingsTable,
-    newGameQuery,
-    selectKingdomsWithGameIdQuery,
-    selectTerritoriesWithGameIdQuery,
-    selectTurnFromGamesQuery,
-    updateKingdomsQuery,
-    updateTerritoriesQuery,
-    updateGameTurnQuery,
-};
+  // selectKingdomQuery,
+  // selectTerritoriesQuery,
+  resetDBTables,
+  resetUsersTableQuery,
+  resetGamesTableQuery,
+  resetKingdomsTableQuery,
+  resetTerritoriesTableQuery,
+  resetArmiesTable,
+  resetHerosTable,
+  resetBuildingsTable,
+  newGameQuery,
+  selectKingdomsWithGameIdQuery,
+  selectTerritoriesWithGameIdQuery,
+  selectTurnFromGamesQuery,
+  updateKingdomsQuery,
+  updateTerritoriesQuery,
+  updateGameTurnQuery
+}

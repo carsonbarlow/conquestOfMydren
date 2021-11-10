@@ -104,22 +104,12 @@ const resetBuildingsTable = `
 
 const resetDBTables = [resetUsersTableQuery, resetGamesTableQuery, resetKingdomsTableQuery, resetTerritoriesTableQuery, resetArmiesTable, resetHerosTable, resetBuildingsTable].join('')
 
-// const selectKingdomQuery = (kingdomId) => `
-//    SELECT * FROM kingdoms
-//    WHERE id = '${kingdomId}';
-// `;
-
-// const selectTerritoriesQuery = (gameId) => `
-//    SELECT * from territories
-//    WHERE game_id = '${gameId}';
-// `;
-
 const kingdomMapId = kingdom => `'${kingdom.id}'`
-const kingdomMapFullRow = kingdom => `('${kingdom.id}','${kingdom.game_id}','${kingdom.user_id}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workers_total}, ${kingdom.workers_reserve}, ${kingdom.solders_total}, ${kingdom.solders_reserve}, ${kingdom.food_production}, ${kingdom.wood_production}, ${kingdom.stone_production}, ${kingdom.gold_production})`
+const kingdomMapFullRow = kingdom => `('${kingdom.id}','${kingdom.gameId}','${kingdom.userId}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workersTotal}, ${kingdom.workersReserve}, ${kingdom.soldersTotal}, ${kingdom.soldersReserve}, ${kingdom.foodProduction}, ${kingdom.woodProduction}, ${kingdom.stoneProduction}, ${kingdom.goldProduction})`
 const newGameQuery = ({ id, kingdoms, territories, turn }) => `
     INSERT INTO games(id, players, turn_number) VALUES ('${id}', array[${kingdoms.map(kingdomMapId)}], ${turn});
     INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdomMapFullRow).join(',')};
-    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.game_id}','${territory.kingdom_id}', ${territory.stat_ID}, ${territory.position}, ${territory.army_id}, ${territory.buildings})`).join(',')};
+    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.gameId}','${territory.kingdomId}', ${territory.statId}, ${territory.position}, ${territory.armyId}, ${territory.buildings})`).join(',')};
 `
 
 const selectKingdomsWithGameIdQuery = ({ id }) => `
@@ -144,14 +134,14 @@ const updateKingdomsQuery = kingdoms => {
         wood = ${kingdom.wood},
         stone = ${kingdom.stone},
         gold = ${kingdom.gold},
-        workers_total = ${kingdom.workers_total},
-        workers_reserve = ${kingdom.workers_reserve},
-        solders_total = ${kingdom.solders_total},
-        solders_reserve = ${kingdom.solders_reserve},
-        food_production = ${kingdom.food_production},
-        wood_production = ${kingdom.wood_production},
-        stone_production = ${kingdom.stone_production},
-        gold_production = ${kingdom.gold_production}
+        workers_total = ${kingdom.workersTotal},
+        workers_reserve = ${kingdom.workersReserve},
+        solders_total = ${kingdom.soldersTotal},
+        solders_reserve = ${kingdom.soldersReserve},
+        food_production = ${kingdom.foodProduction},
+        wood_production = ${kingdom.woodProduction},
+        stone_production = ${kingdom.stoneProduction},
+        gold_production = ${kingdom.goldProduction}
         WHERE id = '${kingdom.id}';
     `).join('')
 }
@@ -159,8 +149,8 @@ const updateKingdomsQuery = kingdoms => {
 const updateTerritoriesQuery = territories => {
   return territories.map(territory => `
         UPDATE territories
-        SET kingdom_id = '${territory.kingdom_id}',
-        army_id = '${territory.army_id}',
+        SET kingdom_id = '${territory.kingdomId}',
+        army_id = '${territory.armyId}',
         buildings = ${territory.buildings}
         WHERE id = '${territory.id}';
     `).join('')
@@ -168,13 +158,11 @@ const updateTerritoriesQuery = territories => {
 
 const updateGameTurnQuery = game => `
     UPDATE games
-    SET turn_number = ${game.turn_number}
+    SET turn_number = ${game.turnNumber}
     WHERE id = '${game.id}';
 `
 
 module.exports = {
-  // selectKingdomQuery,
-  // selectTerritoriesQuery,
   resetDBTables,
   resetUsersTableQuery,
   resetGamesTableQuery,

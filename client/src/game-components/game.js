@@ -47,18 +47,18 @@ const Game = () => {
     const newKingdomStats = {}
 
     if (increments) {
-      if (kingdomStats.workers_reserve) {
-        newKingdomStats.workers_reserve = kingdomStats.workers_reserve - 1
+      if (kingdomStats.workersReserve) {
+        newKingdomStats.workersReserve = kingdomStats.workersReserve - 1
         newKingdomStats[assignment] = kingdomStats[assignment] + 1
       }
     } else {
       if (kingdomStats[assignment]) {
-        newKingdomStats.workers_reserve = kingdomStats.workers_reserve + 1
+        newKingdomStats.workersReserve = kingdomStats.workersReserve + 1
         newKingdomStats[assignment] = kingdomStats[assignment] - 1
       }
     }
     setKingdomStats({ ...kingdomStats, ...newKingdomStats })
-    users.find(user => user.id === kingdomStats.user_id).kingdom = {
+    users.find(user => user.id === kingdomStats.userId).kingdom = {
       ...kingdomStats, ...newKingdomStats
     }
   }
@@ -75,13 +75,13 @@ const Game = () => {
   const handleEndTurn = async () => {
     users.forEach(user => {
       const orders = {
-        game_id: user.kingdom.game_id,
-        kingdom_id: user.kingdom.id,
-        user_id: user.id,
-        food_production: user.kingdom.food_production,
-        wood_production: user.kingdom.wood_production,
-        stone_production: user.kingdom.stone_production,
-        gold_production: user.kingdom.gold_production
+        gameId: user.kingdom.gameId,
+        kingdomId: user.kingdom.id,
+        userId: user.id,
+        foodProduction: user.kingdom.foodProduction,
+        woodProduction: user.kingdom.woodProduction,
+        stoneProduction: user.kingdom.stoneProduction,
+        goldProduction: user.kingdom.goldProduction
       }
       submitTurn({ orders, callback: getAllKingdoms })
     })
@@ -93,15 +93,14 @@ const Game = () => {
     stone: 0,
     gold: 0,
 
-    workers_reserve: 0,
-    workers_total: 0
+    workersReserve: 0,
+    workersTotal: 0
   })
 
   const [territoriesStats, setTerritoriesStats] = useState([])
 
   const gotGameData = (data) => {
-    currentGameId = data.id
-    const user = users.find((user) => user.id === data.kingdom.user_id)
+    const user = users.find((user) => user.id === data.kingdom.userId)
     user.kingdom = data.kingdom
     user.territories = data.territories
     setKingdomStats(data.kingdom)
@@ -118,7 +117,12 @@ const Game = () => {
   }
 
   const handleMakeNewGame = () => {
-    postNewGame(gotGameData)
+    postNewGame(newGameMade)
+  }
+
+  const newGameMade = (id) => {
+    currentGameId = id
+    getAllKingdoms()
   }
 
   useEffect(getAllKingdoms, [])

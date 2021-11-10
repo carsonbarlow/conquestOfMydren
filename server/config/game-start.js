@@ -25,80 +25,80 @@ const playerArray = [
 
 const territoryArray = [
   {
-    kingdom_id_index: 0,
-    stat_id: 1,
+    kingdomIdIndex: 0,
+    statId: 1,
     position: 1
   }, {
-    kingdom_id_index: null,
-    stat_id: 8,
+    kingdomIdIndex: null,
+    statId: 8,
     position: 2
   }, {
-    kingdom_id_index: null,
-    stat_id: 7,
+    kingdomIdIndex: null,
+    statId: 7,
     position: 3
   }, {
-    kingdom_id_index: 5,
-    stat_id: 6,
+    kingdomIdIndex: 5,
+    statId: 6,
     position: 4
   }, {
-    kingdom_id_index: null,
-    stat_id: 9,
+    kingdomIdIndex: null,
+    statId: 9,
     position: 5
   }, {
-    kingdom_id_index: 1,
-    stat_id: 2,
+    kingdomIdIndex: 1,
+    statId: 2,
     position: 6
   }, {
-    kingdom_id_index: null,
-    stat_id: 7,
+    kingdomIdIndex: null,
+    statId: 7,
     position: 7
   }, {
-    kingdom_id_index: null,
-    stat_id: 8,
+    kingdomIdIndex: null,
+    statId: 8,
     position: 8
   }, {
-    kingdom_id_index: null,
-    stat_id: 9,
+    kingdomIdIndex: null,
+    statId: 9,
     position: 9
   }, {
-    kingdom_id_index: null,
-    stat_id: 10,
+    kingdomIdIndex: null,
+    statId: 10,
     position: 10
   }, {
-    kingdom_id_index: null,
-    stat_id: 9,
+    kingdomIdIndex: null,
+    statId: 9,
     position: 11
   }, {
-    kingdom_id_index: null,
-    stat_id: 8,
+    kingdomIdIndex: null,
+    statId: 8,
     position: 12
   }, {
-    kingdom_id_index: null,
-    stat_id: 7,
+    kingdomIdIndex: null,
+    statId: 7,
     position: 13
   }, {
-    kingdom_id_index: 4,
-    stat_id: 5,
+    kingdomIdIndex: 4,
+    statId: 5,
     position: 14
   }, {
-    kingdom_id_index: null,
-    stat_id: 9,
+    kingdomIdIndex: null,
+    statId: 9,
     position: 15
   }, {
-    kingdom_id_index: 2,
-    stat_id: 3,
+    kingdomIdIndex: 2,
+    statId: 3,
     position: 16
   }, {
-    kingdom_id_index: null,
-    stat_id: 7,
+    kingdomIdIndex: null,
+    statId: 7,
     position: 17
   }, {
-    kingdom_id_index: null,
-    stat_id: 8,
+    kingdomIdIndex: null,
+    statId: 8,
     position: 18
   }, {
-    kingdom_id_index: 3,
-    stat_id: 4,
+    kingdomIdIndex: 3,
+    statId: 4,
     position: 19
   }
 ]
@@ -109,31 +109,31 @@ const gameStart = () => {
   const kingdoms = playerArray.map(player => {
     return {
       id: uuidv4(),
-      game_id: gameId,
-      user_id: player.id,
+      gameId: gameId,
+      userId: player.id,
       food: 100,
       wood: 100,
       stone: 100,
       gold: 100,
-      workers_total: 10,
-      workers_reserve: 10,
-      solders_total: 10,
-      solders_reserve: 10,
-      food_production: 0,
-      wood_production: 0,
-      stone_production: 0,
-      gold_production: 0
+      workersTotal: 10,
+      workersReserve: 10,
+      soldersTotal: 10,
+      soldersReserve: 10,
+      foodProduction: 0,
+      woodProduction: 0,
+      stoneProduction: 0,
+      goldProduction: 0
     }
   })
 
   const territories = territoryArray.map(territory => {
     return {
       id: uuidv4(),
-      game_id: gameId,
-      kingdom_id: territory.kingdom_id_index === null ? null : kingdoms[territory.kingdom_id_index].id,
-      stat_id: territory.stat_id,
+      gameId: gameId,
+      kingdomId: territory.kingdomIdIndex === null ? null : kingdoms[territory.kingdomIdIndex].id,
+      statId: territory.statId,
       position: territory.position,
-      army_id: null,
+      armyId: null,
       buildings: null
     }
   })

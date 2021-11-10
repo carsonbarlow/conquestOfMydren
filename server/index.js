@@ -56,13 +56,13 @@ const postGameRequest = async (gameState) => {
 const gameState = async (req, res) => {
   await waitFor(1000)
 
-  let requestedGameState = game.findGameForUser({ gameId: req.query.game_id, userId: req.query.user_id })
+  let requestedGameState = game.findGameForUser({ gameId: req.query.gameId, userId: req.query.userId })
 
   if (!requestedGameState) {
-    const result = await getGameRequest({ gameId: req.query.game_id })
-    console.log('Got game data.')
-    game.setGameData({ id: req.query.game_id, kingdoms: result.kingdoms, territories: result.territories, turn_number: result.turn_number })
-    requestedGameState = game.findGameForUser({ gameId: req.query.game_id, userId: req.query.user_id })
+    const result = await getGameRequest({ gameId: req.query.gameId })
+    console.log('Got game data from DB.')
+    game.setGameData({ id: req.query.gameId, kingdoms: result.kingdoms, territories: result.territories, turnNumber: result.turnNumber })
+    requestedGameState = game.findGameForUser({ gameId: req.query.gameId, userId: req.query.userId })
   }
 
   res.json(requestedGameState)
@@ -74,7 +74,7 @@ const submitTurn = async (req, res) => {
   const response = {}
   const allUsersReady = game.addTurnData(req.body)
   if (allUsersReady) {
-    const newTurn = game.calculateGameTurn(req.body.game_id)
+    const newTurn = game.calculateGameTurn(req.body.gameId)
     await postGameRequest(newTurn)
     response.allUsersReady = true
   }
@@ -84,8 +84,6 @@ const submitTurn = async (req, res) => {
 }
 
 app.post('/submitTurn', submitTurn)
-
-const playerId = 'fb5ab0a5-a590-4e00-ba2e-2a7d5e5b2aa5'
 
 const newGame = async (req, res0) => {
   await waitFor(1000)
@@ -98,8 +96,8 @@ const newGame = async (req, res0) => {
     .end((err, res1) => {
       if (!err) {
         console.log('New game created.')
-        const kingdomId = createdGame.kingdoms.find((kingdom) => kingdom.userId === playerId).id
-        res0.json(game.procureKingdomSpecificData({ kingdomId, gameData: createdGame }))
+        console.log(createdGame.id)
+        res0.json({ gameId: createdGame.id })
       } else {
         res0.json({ err, body: res1.body })
       }

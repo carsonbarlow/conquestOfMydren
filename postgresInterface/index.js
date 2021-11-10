@@ -17,6 +17,8 @@ const {
   updateGameTurnQuery
 } = require('./queries')
 
+const { convertVariableNames } = require('./utilities')
+
 //= =========== DB Interactions ============\\
 
 const client = new Client({
@@ -57,11 +59,11 @@ const getGame = async (id) => {
   const returnData = { id }
   try {
     let response = await client.query(selectTurnFromGamesQuery({ id }))
-    returnData.turn_number = response.rows[0].turn_number
+    returnData.turnNumber = response.rows[0].turn_number
     response = await client.query(selectKingdomsWithGameIdQuery({ id }))
-    returnData.kingdoms = response.rows
+    returnData.kingdoms = convertVariableNames.kingdomToCammelCase(response.rows)
     response = await client.query(selectTerritoriesWithGameIdQuery({ id }))
-    returnData.territories = response.rows
+    returnData.territories = convertVariableNames.territoriesToCammelCase(response.rows)
     console.log(`Selected game: ${id}.`)
     returnData.success = true
   } catch (error) {
@@ -75,7 +77,7 @@ const updateGameTurn = async (gameState) => {
   await client.query(updateKingdomsQuery(gameState.kingdoms))
   await client.query(updateTerritoriesQuery(gameState.territories))
   await client.query(updateGameTurnQuery(gameState))
-  console.log(`Updated game ${gameState.id} to turn ${gameState.turn_number}`)
+  console.log(`Updated game ${gameState.id} to turn ${gameState.turnNumber}`)
   return gameState
 }
 

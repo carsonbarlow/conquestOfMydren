@@ -8,42 +8,42 @@ const Hud = (props) => {
 
       <div id='hud'>
         <div className='workers-strip'>
-          Workers: {props.kingdomStats.workers_reserve}/{props.kingdomStats.workers_total}
+          Workers: {props.kingdomStats.workersReserve}/{props.kingdomStats.workersTotal}
         </div>
 
         <div className='resource-strip'>
           <span className='resource-quantity'>food: {props.kingdomStats.food}</span>
           <span className='worker-allocation'>
-            <img src={imgs.foodIcon} alt={imgAlts.foodIcon} /> {props.kingdomStats.food_production}
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='food_production' />
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='food_production' />
+            <img src={imgs.foodIcon} alt={imgAlts.foodIcon} /> {props.kingdomStats.foodProduction}
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='foodProduction' />
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='foodProduction' />
           </span>
         </div>
 
         <div className='resource-strip'>
           <span className='resource-quantity'>wood: {props.kingdomStats.wood}</span>
           <span className='worker-allocation'>
-            <img src={imgs.woodIcon} alt={imgAlts.woodIcon} />  {props.kingdomStats.wood_production}
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='wood_production' />
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='wood_production' />
+            <img src={imgs.woodIcon} alt={imgAlts.woodIcon} />  {props.kingdomStats.woodProduction}
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='woodProduction' />
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='woodProduction' />
           </span>
         </div>
 
         <div className='resource-strip'>
           <span className='resource-quantity'>stone: {props.kingdomStats.stone}</span>
           <span className='worker-allocation'>
-            <img src={imgs.stoneIcon} alt={imgAlts.stoneIcon} />  {props.kingdomStats.stone_production}
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='stone_production' />
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='stone_production' />
+            <img src={imgs.stoneIcon} alt={imgAlts.stoneIcon} />  {props.kingdomStats.stoneProduction}
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='stoneProduction' />
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='stoneProduction' />
           </span>
         </div>
 
         <div className='resource-strip'>
           <span className='resource-quantity'>gold: {props.kingdomStats.gold}</span>
           <span className='worker-allocation'>
-            <img src={imgs.goldIcon} alt={imgAlts.goldIcon} />  {props.kingdomStats.gold_production}
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='gold_production' />
-            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='gold_production' />
+            <img src={imgs.goldIcon} alt={imgAlts.goldIcon} />  {props.kingdomStats.goldProduction}
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments catagory='goldProduction' />
+            <IncrementButton clickFunction={props.buttonFunctions.incrementWorkerAssignment} increments={false} catagory='goldProduction' />
           </span>
         </div>
 

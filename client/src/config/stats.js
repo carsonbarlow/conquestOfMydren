@@ -3,90 +3,90 @@ import images from './images.js'
 const { imgs } = images
 
 const territories = {
-  terrotory_1: {
-    img: imgs.territory_1,
-    production_bonus: {
+  terrotory1: {
+    img: imgs.territory1,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_2: {
-    img: imgs.territory_2,
-    production_bonus: {
+  terrotory2: {
+    img: imgs.territory2,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_3: {
-    img: imgs.territory_3,
-    production_bonus: {
+  terrotory3: {
+    img: imgs.territory3,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_4: {
-    img: imgs.territory_4,
-    production_bonus: {
+  terrotory4: {
+    img: imgs.territory4,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_5: {
-    img: imgs.territory_5,
-    production_bonus: {
+  terrotory5: {
+    img: imgs.territory5,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_6: {
-    img: imgs.territory_6,
-    production_bonus: {
+  terrotory6: {
+    img: imgs.territory6,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_7: {
-    img: imgs.territory_7,
-    production_bonus: {
+  terrotory7: {
+    img: imgs.territory7,
+    productionBonus: {
       food: 50,
       wood: 0,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_8: {
-    img: imgs.territory_8,
-    production_bonus: {
+  terrotory8: {
+    img: imgs.territory8,
+    productionBonus: {
       food: 0,
       wood: 50,
       stone: 0,
       gold: 0
     }
   },
-  terrotory_9: {
-    img: imgs.territory_9,
-    production_bonus: {
+  terrotory9: {
+    img: imgs.territory9,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 50,
       gold: 0
     }
   },
-  terrotory_10: {
-    img: imgs.territory_10,
-    production_bonus: {
+  terrotory10: {
+    img: imgs.territory10,
+    productionBonus: {
       food: 0,
       wood: 0,
       stone: 0,

@@ -13,7 +13,7 @@ const game = () => {
   }
 
   const setGameData = (data) => {
-    matches[data.id] = { id: data.id, kingdoms: data.kingdoms, territories: data.territories, turn_number: data.turn_number }
+    matches[data.id] = { id: data.id, kingdoms: data.kingdoms, territories: data.territories, turnNumber: data.turnNumber }
   }
 
   const findGameForUser = ({ gameId, userId }) => {
@@ -21,30 +21,30 @@ const game = () => {
     if (!gameData) {
       return null
     }
-    const kingdomId = gameData.kingdoms.find(kingdom => kingdom.user_id === userId).id
+    const kingdomId = gameData.kingdoms.find(kingdom => kingdom.userId === userId).id
     return {
       id: gameId,
-      kingdom: gameData.kingdoms.find(kingdom => kingdom.user_id === userId),
+      kingdom: gameData.kingdoms.find(kingdom => kingdom.userId === userId),
       territories: gameData.territories.map(territory => {
         const filteredTerritory = {}
         filteredTerritory.id = territory.id
-        filteredTerritory.kingdom_id = territory.kingdom_id
+        filteredTerritory.kingdomId = territory.kingdomId
         filteredTerritory.position = territory.position
-        filteredTerritory.stat_id = territory.stat_id
-        if (territory.kingdom_id === kingdomId) {
-          filteredTerritory.army_id = territory.army_id
+        filteredTerritory.statId = territory.statId
+        if (territory.kingdomId === kingdomId) {
+          filteredTerritory.armyId = territory.armyId
           filteredTerritory.buildings = territory.buildings
         }
         return filteredTerritory
       }),
-      turn_number: gameData.turn_number
+      turnNumber: gameData.turnNumber
     }
   }
 
   const addTurnData = (data) => {
-    matches[data.game_id].kingdoms.find(kingdom => kingdom.id === data.kingdom_id).orders = data
+    matches[data.gameId].kingdoms.find(kingdom => kingdom.id === data.kingdomId).orders = data
 
-    const unreadyUser = matches[data.game_id].kingdoms.find(kingdom => kingdom.orders === undefined)
+    const unreadyUser = matches[data.gameId].kingdoms.find(kingdom => kingdom.orders === undefined)
 
     return !unreadyUser
   }
@@ -58,17 +58,17 @@ const game = () => {
   const procureKingdomSpecificData = ({ kingdomId, gameData }) => {
     const returnData = {
       id: gameData.id,
-      turn_number: gameData.turn_number
+      turnNumber: gameData.turnNumber
     }
     returnData.kingdom = gameData.kingdoms.find((kingdom) => kingdom.id === kingdomId)
     returnData.territories = gameData.territories.map(territory => {
       const filteredTerritory = {}
       filteredTerritory.id = territory.id
-      filteredTerritory.kingdom_id = territory.kingdom_id
+      filteredTerritory.kingdomId = territory.kingdomId
       filteredTerritory.position = territory.position
-      filteredTerritory.stat_id = territory.stat_id
-      if (territory.kingdom_id === kingdomId) {
-        filteredTerritory.army_id = territory.army_id
+      filteredTerritory.statId = territory.statId
+      if (territory.kingdomId === kingdomId) {
+        filteredTerritory.armyId = territory.armyId
         filteredTerritory.buildings = territory.buildings
       }
       return filteredTerritory

@@ -63,7 +63,7 @@ const getTopPosition = (id) => {
 }
 
 const Territory = (props) => {
-  const { stat_id: statId, position } = props.stats
+  const { statId, position } = props.stats
   const positionLeft = getLeftPosition(position)
   const positionTop = getTopPosition(position)
 

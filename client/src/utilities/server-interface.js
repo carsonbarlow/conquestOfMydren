@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const ServerInterface = () => {
   const getGameData = async ({ callback, gameId, userId }) => {
-    const response = await axios.get('http://localhost:3001/gameState/?game_id=' + gameId + '&user_id=' + userId)
+    const response = await axios.get('http://localhost:3001/gameState/?gameId=' + gameId + '&userId=' + userId)
     const data = await response.data
     callback(data)
   }
@@ -20,7 +20,7 @@ const ServerInterface = () => {
     if (!newGameDebounce) {
       newGameDebounce = true
       const response = await axios.post('http://localhost:3001/newGame/')
-      callback(response.data)
+      callback(response.data.gameId)
       newGameDebounce = false
     }
   }

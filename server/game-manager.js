@@ -1,11 +1,23 @@
 'use strict'
 
+const cloneDeep = require('clone-deep')
+const config = require('config').config
+const fileLocations = config.fileLocations.forGameJs
+
 const { gameStart } = require('./config/game-start.js')
-const { calculateTurn } = require('./turn-calculator.js')
+const { calculateTurn } = require(fileLocations.turnCalculator)
 
-const matches = {}
+let matches = {}
 
-const game = () => {
+const gameManager = () => {
+  const getMatches = () => {
+    return { ...matches }
+  }
+
+  const removeMatches = () => {
+    matches = {}
+  }
+
   const createGame = () => {
     const newGame = gameStart()
     matches[newGame.id] = { ...newGame }
@@ -13,7 +25,14 @@ const game = () => {
   }
 
   const setGameData = (data) => {
-    matches[data.id] = { id: data.id, kingdoms: data.kingdoms, territories: data.territories, turnNumber: data.turnNumber }
+    const gameData = cloneDeep(data)
+
+    matches[gameData.id] = {
+      id: gameData.id,
+      kingdoms: gameData.kingdoms,
+      territories: gameData.territories,
+      turnNumber: gameData.turnNumber
+    }
   }
 
   const findGameForUser = ({ gameId, userId }) => {
@@ -42,7 +61,7 @@ const game = () => {
   }
 
   const addTurnData = (data) => {
-    matches[data.gameId].kingdoms.find(kingdom => kingdom.id === data.kingdomId).orders = data
+    matches[data.gameId].kingdoms.find(kingdom => kingdom.id === data.kingdomId).orders = { ...data }
 
     const unreadyUser = matches[data.gameId].kingdoms.find(kingdom => kingdom.orders === undefined)
 
@@ -79,6 +98,8 @@ const game = () => {
   const message = 'Hello from Game 0.0.1!'
 
   return {
+    getMatches,
+    removeMatches,
     addTurnData,
     calculateGameTurn,
     message,
@@ -89,4 +110,4 @@ const game = () => {
   }
 }
 
-module.exports = game()
+module.exports = gameManager()

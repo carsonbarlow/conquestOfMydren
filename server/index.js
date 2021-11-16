@@ -1,6 +1,6 @@
 'use strict'
 
-const game = require('./game')
+const gameManager = require('./game-manager')
 const express = require('express')
 const superagent = require('superagent')
 const path = require('path')
@@ -17,7 +17,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 
 app.get('/', function (req, res) {
-  res.send(game.message)
+  res.send(gameManager.message)
 })
 
 const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay))
@@ -56,13 +56,13 @@ const postGameRequest = async (gameState) => {
 const gameState = async (req, res) => {
   await waitFor(1000)
 
-  let requestedGameState = game.findGameForUser({ gameId: req.query.gameId, userId: req.query.userId })
+  let requestedGameState = gameManager.findGameForUser({ gameId: req.query.gameId, userId: req.query.userId })
 
   if (!requestedGameState) {
     const result = await getGameRequest({ gameId: req.query.gameId })
     console.log('Got game data from DB.')
-    game.setGameData({ id: req.query.gameId, kingdoms: result.kingdoms, territories: result.territories, turnNumber: result.turnNumber })
-    requestedGameState = game.findGameForUser({ gameId: req.query.gameId, userId: req.query.userId })
+    gameManager.setGameData({ id: req.query.gameId, kingdoms: result.kingdoms, territories: result.territories, turnNumber: result.turnNumber })
+    requestedGameState = gameManager.findGameForUser({ gameId: req.query.gameId, userId: req.query.userId })
   }
 
   res.json(requestedGameState)
@@ -72,9 +72,9 @@ app.get('/gameState/', gameState)
 const submitTurn = async (req, res) => {
   await waitFor(1000)
   const response = {}
-  const allUsersReady = game.addTurnData(req.body)
+  const allUsersReady = gameManager.addTurnData(req.body)
   if (allUsersReady) {
-    const newTurn = game.calculateGameTurn(req.body.gameId)
+    const newTurn = gameManager.calculateGameTurn(req.body.gameId)
     await postGameRequest(newTurn)
     response.allUsersReady = true
   }
@@ -87,7 +87,7 @@ app.post('/submitTurn', submitTurn)
 
 const newGame = async (req, res0) => {
   await waitFor(1000)
-  const createdGame = game.createGame()
+  const createdGame = gameManager.createGame()
 
   await superagent
     .post('http://localhost:3002/newGame')

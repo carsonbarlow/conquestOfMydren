@@ -1,17 +1,15 @@
 'use strict'
 
 const cloneDeep = require('clone-deep')
-const config = require('config').config
-const fileLocations = config.fileLocations.forGameJs
 
 const { gameStart } = require('./config/game-start.js')
-const { calculateTurn } = require(fileLocations.turnCalculator)
+const turnCalculator = require('./turn-calculator.js')
 
 let matches = {}
 
 const gameManager = () => {
   const getMatches = () => {
-    return { ...matches }
+    return cloneDeep(matches)
   }
 
   const removeMatches = () => {
@@ -20,7 +18,7 @@ const gameManager = () => {
 
   const createGame = () => {
     const newGame = gameStart()
-    matches[newGame.id] = { ...newGame }
+    matches[newGame.id] = cloneDeep(newGame)
     return matches[newGame.id]
   }
 
@@ -37,9 +35,11 @@ const gameManager = () => {
 
   const findGameForUser = ({ gameId, userId }) => {
     const gameData = matches[gameId]
+    // console.log('gameData: ', gameData)
     if (!gameData) {
       return null
     }
+
     const kingdomId = gameData.kingdoms.find(kingdom => kingdom.userId === userId).id
     return {
       id: gameId,
@@ -69,7 +69,7 @@ const gameManager = () => {
   }
 
   const calculateGameTurn = (id) => {
-    const newGameState = calculateTurn(matches[id])
+    const newGameState = turnCalculator.calculateTurn(matches[id])
     matches[id] = newGameState
     return newGameState
   }

@@ -1,5 +1,8 @@
 /* eslint-disable no-undef */
 
+const sinon = require('sinon')
+const turnCalculator = require('../../turn-calculator')
+
 const { assert, expect } = require('chai')
 const gameManager = require('../../game-manager.js')
 
@@ -11,7 +14,7 @@ const {
   testOrders
 } = require('../test-data.js')
 
-describe('game', () => {
+describe('gameManager', () => {
   describe('getMatches', () => {
     it('returns an empty object if there re no matches', () => {
       const matches = gameManager.getMatches()
@@ -190,29 +193,26 @@ describe('game', () => {
 
   describe('calculateGameTurn', () => {
     before(() => {
+      sinon.stub(turnCalculator, 'calculateTurn').returns(testGame3)
       gameManager.setGameData(testGame1)
     })
+
+    after(() => {
+      turnCalculator.calculateTurn.restore()
+      gameManager.removeMatches()
+    })
+
     it('sets the new game data to matches', () => {
       gameManager.calculateGameTurn(testGame1.id)
       const testGame = gameManager.getMatches()[testGame1.id]
       assert.equal(testGame.id, testGame1.id)
       assert.equal(testGame.foo, 'bar')
     })
+
     it('returns new game data', () => {
       const newGameData = gameManager.calculateGameTurn(testGame1.id)
       assert.typeOf(newGameData, 'Object')
       assert.equal(newGameData.foo, 'bar')
     })
-    after(() => {
-      gameManager.removeMatches()
-    })
   })
 })
-
-// before(() => { })
-// it('', () => { })
-// it('', () => { })
-// it('', () => { })
-// it('', () => { })
-// it('', () => { })
-// after(() => { })

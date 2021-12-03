@@ -106,7 +106,7 @@ describe('turn-calculator', () => {
     })
 
     it('increment turn', () => {
-      assert.equal(newGameState1.turnNumber, 2)
+      assert.equal(newGameState1.turnNumber, 1235)
     })
   })
 })

@@ -142,7 +142,7 @@ const gameStart = () => {
     id: gameId,
     kingdoms,
     territories,
-    turn: 1
+    turnNumber: 1
   }
 }
 

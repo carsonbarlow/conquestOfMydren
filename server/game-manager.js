@@ -1,26 +1,45 @@
 'use strict'
 
+const cloneDeep = require('clone-deep')
+
 const { gameStart } = require('./config/game-start.js')
-const { calculateTurn } = require('./turn-calculator.js')
+const turnCalculator = require('./turn-calculator.js')
 
-const matches = {}
+let matches = {}
 
-const game = () => {
+const gameManager = () => {
+  const getMatches = () => {
+    return cloneDeep(matches)
+  }
+
+  const removeMatches = () => {
+    matches = {}
+  }
+
   const createGame = () => {
     const newGame = gameStart()
-    matches[newGame.id] = { ...newGame }
+    matches[newGame.id] = cloneDeep(newGame)
     return matches[newGame.id]
   }
 
   const setGameData = (data) => {
-    matches[data.id] = { id: data.id, kingdoms: data.kingdoms, territories: data.territories, turnNumber: data.turnNumber }
+    const gameData = cloneDeep(data)
+
+    matches[gameData.id] = {
+      id: gameData.id,
+      kingdoms: gameData.kingdoms,
+      territories: gameData.territories,
+      turnNumber: gameData.turnNumber
+    }
   }
 
   const findGameForUser = ({ gameId, userId }) => {
     const gameData = matches[gameId]
+    // console.log('gameData: ', gameData)
     if (!gameData) {
       return null
     }
+
     const kingdomId = gameData.kingdoms.find(kingdom => kingdom.userId === userId).id
     return {
       id: gameId,
@@ -42,7 +61,7 @@ const game = () => {
   }
 
   const addTurnData = (data) => {
-    matches[data.gameId].kingdoms.find(kingdom => kingdom.id === data.kingdomId).orders = data
+    matches[data.gameId].kingdoms.find(kingdom => kingdom.id === data.kingdomId).orders = { ...data }
 
     const unreadyUser = matches[data.gameId].kingdoms.find(kingdom => kingdom.orders === undefined)
 
@@ -50,7 +69,7 @@ const game = () => {
   }
 
   const calculateGameTurn = (id) => {
-    const newGameState = calculateTurn(matches[id])
+    const newGameState = turnCalculator.calculateTurn(matches[id])
     matches[id] = newGameState
     return newGameState
   }
@@ -79,6 +98,8 @@ const game = () => {
   const message = 'Hello from Game 0.0.1!'
 
   return {
+    getMatches,
+    removeMatches,
     addTurnData,
     calculateGameTurn,
     message,
@@ -89,4 +110,4 @@ const game = () => {
   }
 }
 
-module.exports = game()
+module.exports = gameManager()

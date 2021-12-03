@@ -56,41 +56,43 @@ const WOODPRODUCTION_RATE = 3
 const STONEPRODUCTION_RATE = 2
 const GOLDPRODUCTION_RATE = 1
 
-const calculateTurn = (game) => {
-  const newGameState = { ...game }
+const turnCalculator = () => {
+  const calculateTurn = (game) => {
+    const newGameState = { ...game }
 
-  newGameState.kingdoms.forEach((kingdom, i) => {
-    kingdom.orders = kingdom.orders || defaultOrders[i]
-  })
+    newGameState.kingdoms.forEach((kingdom, i) => {
+      kingdom.orders = kingdom.orders || defaultOrders[i]
+    })
 
-  // assign workers
-  newGameState.kingdoms.forEach(kingdom => {
-    kingdom.foodProduction = kingdom.orders.foodProduction
-    kingdom.woodProduction = kingdom.orders.woodProduction
-    kingdom.stoneProduction = kingdom.orders.stoneProduction
-    kingdom.goldProduction = kingdom.orders.goldProduction
-    kingdom.workersReserve = kingdom.workersTotal - kingdom.foodProduction - kingdom.woodProduction - kingdom.stoneProduction - kingdom.goldProduction
-  })
+    // assign workers
+    newGameState.kingdoms.forEach(kingdom => {
+      kingdom.foodProduction = kingdom.orders.foodProduction
+      kingdom.woodProduction = kingdom.orders.woodProduction
+      kingdom.stoneProduction = kingdom.orders.stoneProduction
+      kingdom.goldProduction = kingdom.orders.goldProduction
+      kingdom.workersReserve = kingdom.workersTotal - kingdom.foodProduction - kingdom.woodProduction - kingdom.stoneProduction - kingdom.goldProduction
+    })
 
-  // give resources
-  newGameState.kingdoms.forEach(kingdom => {
-    kingdom.food += kingdom.foodProduction * FOODPRODUCTION_RATE
-    kingdom.wood += kingdom.woodProduction * WOODPRODUCTION_RATE
-    kingdom.stone += kingdom.stoneProduction * STONEPRODUCTION_RATE
-    kingdom.gold += kingdom.goldProduction * GOLDPRODUCTION_RATE
-  })
+    // give resources
+    newGameState.kingdoms.forEach(kingdom => {
+      kingdom.food += kingdom.foodProduction * FOODPRODUCTION_RATE
+      kingdom.wood += kingdom.woodProduction * WOODPRODUCTION_RATE
+      kingdom.stone += kingdom.stoneProduction * STONEPRODUCTION_RATE
+      kingdom.gold += kingdom.goldProduction * GOLDPRODUCTION_RATE
+    })
 
-  // remove orders for a fresh new turn
-  newGameState.kingdoms.forEach(kingdom => {
-    kingdom.orders = undefined
-  })
+    // remove orders for a fresh new turn
+    newGameState.kingdoms.forEach(kingdom => {
+      kingdom.orders = undefined
+    })
 
-  // increment turn
-  newGameState.turnNumber++
+    // increment turn
+    newGameState.turnNumber++
 
-  return newGameState
+    return newGameState
+  }
+
+  return { calculateTurn }
 }
 
-module.exports = {
-  calculateTurn
-}
+module.exports = turnCalculator()

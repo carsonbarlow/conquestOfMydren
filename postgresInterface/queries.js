@@ -1,10 +1,10 @@
 'use strict'
 
-const { ignatius, taranis, lucasta, glyndwr, demeter, melanthios, games, kingdoms, territories } = require('./test-data.js')
+const { users, games, kingdoms, territories } = require('./test/test-data.js')
 
 //= =========== Query Compolations ============\\
 
-const resetUsersTableQuery = `
+const resetUsersTable = `
     DROP TABLE IF EXISTS users;
     CREATE TABLE users (
     id varchar (36),
@@ -12,9 +12,9 @@ const resetUsersTableQuery = `
     games text ARRAY,
     PRIMARY KEY (id)
     );
-    INSERT INTO users(id, name, games) VALUES ${[ignatius, taranis, lucasta, glyndwr, demeter, melanthios].map(user => `('${user.id}', '${user.name}', array[${user.games}])`).join(',')};`
+    INSERT INTO users(id, name, games) VALUES ${users.map(user => `('${user.id}', '${user.name}', array[${user.games}])`).join(',')};`
 
-const resetGamesTableQuery = `
+const resetGamesTable = `
     DROP TABLE IF EXISTS games;
     CREATE TABLE games (
     id varchar (36),
@@ -24,7 +24,7 @@ const resetGamesTableQuery = `
     );
     INSERT INTO games(id, players, turn_number) VALUES ${games.map(game => `('${game.id}', array[${game.players}], ${game.turn_number})`).join(',')};`
 
-const resetKingdomsTableQuery = `
+const resetKingdomsTable = `
     DROP TABLE IF EXISTS kingdoms;
     CREATE TABLE kingdoms (
     id varchar (36),
@@ -46,7 +46,7 @@ const resetKingdomsTableQuery = `
     );
     INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdom => `('${kingdom.id}','${kingdom.game_id}','${kingdom.user_id}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workers_total}, ${kingdom.workers_reserve}, ${kingdom.solders_total}, ${kingdom.solders_reserve}, ${kingdom.food_production}, ${kingdom.wood_production}, ${kingdom.stone_production}, ${kingdom.gold_production})`).join(',')};`
 
-const resetTerritoriesTableQuery = `
+const resetTerritoriesTable = `
     DROP TABLE IF EXISTS territories;
     CREATE TABLE territories (
     id varchar(36),
@@ -102,32 +102,32 @@ const resetBuildingsTable = `
     PRIMARY KEY (id)
     );`
 
-const resetDBTables = [resetUsersTableQuery, resetGamesTableQuery, resetKingdomsTableQuery, resetTerritoriesTableQuery, resetArmiesTable, resetHerosTable, resetBuildingsTable].join('')
+const resetDBTables = [resetUsersTable, resetGamesTable, resetKingdomsTable, resetTerritoriesTable, resetArmiesTable, resetHerosTable, resetBuildingsTable].join('')
 
 const kingdomMapId = kingdom => `'${kingdom.id}'`
 const kingdomMapFullRow = kingdom => `('${kingdom.id}','${kingdom.gameId}','${kingdom.userId}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workersTotal}, ${kingdom.workersReserve}, ${kingdom.soldersTotal}, ${kingdom.soldersReserve}, ${kingdom.foodProduction}, ${kingdom.woodProduction}, ${kingdom.stoneProduction}, ${kingdom.goldProduction})`
-const newGameQuery = ({ id, kingdoms, territories, turn }) => `
-    INSERT INTO games(id, players, turn_number) VALUES ('${id}', array[${kingdoms.map(kingdomMapId)}], ${turn});
+const territoriesMapFullRow = territory => `('${territory.id}','${territory.gameId}','${territory.kingdomId}', ${territory.statId}, ${territory.position}, ${territory.armyId}, ${territory.buildings})`
+const newGame = ({ id, kingdoms, territories, turnNumber }) => `
+    INSERT INTO games(id, players, turn_number) VALUES ('${id}', array[${kingdoms.map(kingdomMapId)}], ${turnNumber});
     INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdomMapFullRow).join(',')};
-    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.gameId}','${territory.kingdomId}', ${territory.statId}, ${territory.position}, ${territory.armyId}, ${territory.buildings})`).join(',')};
-`
+    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territoriesMapFullRow).join(',')};`
 
-const selectKingdomsWithGameIdQuery = ({ id }) => `
+const selectKingdomsWithGameId = ({ id }) => `
     SELECT * from kingdoms
     WHERE game_id = '${id}';
 `
 
-const selectTerritoriesWithGameIdQuery = ({ id }) => `
+const selectTerritoriesWithGameId = ({ id }) => `
     SELECT * from territories
     WHERE game_id = '${id}';
 `
 
-const selectTurnFromGamesQuery = ({ id }) => `
+const selectTurnFromGames = ({ id }) => `
     SELECT turn_number from games
     WHERE id = '${id}';
 `
 
-const updateKingdomsQuery = kingdoms => {
+const updateKingdoms = kingdoms => {
   return kingdoms.map(kingdom => `
         UPDATE kingdoms
         SET food = ${kingdom.food},
@@ -146,7 +146,7 @@ const updateKingdomsQuery = kingdoms => {
     `).join('')
 }
 
-const updateTerritoriesQuery = territories => {
+const updateTerritories = territories => {
   return territories.map(territory => `
         UPDATE territories
         SET kingdom_id = '${territory.kingdomId}',
@@ -156,26 +156,21 @@ const updateTerritoriesQuery = territories => {
     `).join('')
 }
 
-const updateGameTurnQuery = game => `
+const updateGameTurn = game => `
     UPDATE games
     SET turn_number = ${game.turnNumber}
     WHERE id = '${game.id}';
 `
 
-module.exports = {
+const queries = {
   resetDBTables,
-  resetUsersTableQuery,
-  resetGamesTableQuery,
-  resetKingdomsTableQuery,
-  resetTerritoriesTableQuery,
-  resetArmiesTable,
-  resetHerosTable,
-  resetBuildingsTable,
-  newGameQuery,
-  selectKingdomsWithGameIdQuery,
-  selectTerritoriesWithGameIdQuery,
-  selectTurnFromGamesQuery,
-  updateKingdomsQuery,
-  updateTerritoriesQuery,
-  updateGameTurnQuery
+  newGame,
+  selectKingdomsWithGameId,
+  selectTerritoriesWithGameId,
+  selectTurnFromGames,
+  updateKingdoms,
+  updateTerritories,
+  updateGameTurn
 }
+
+module.exports = queries

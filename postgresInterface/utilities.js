@@ -1,6 +1,6 @@
 
 const convertVariableNames = {
-  kingdomToCammelCase: (kingdoms) => {
+  kingdomsToCammelCase: (kingdoms) => {
     return kingdoms.map(kingdom => {
       return {
         id: kingdom.id,
@@ -36,4 +36,6 @@ const convertVariableNames = {
   }
 }
 
-module.exports = { convertVariableNames }
+const utilities = { convertVariableNames }
+
+module.exports = utilities

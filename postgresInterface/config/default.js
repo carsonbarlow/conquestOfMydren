@@ -1,5 +1,5 @@
 const config = {
-  environment: 'development'
+  databaseName: 'conquest'
 
 }
 

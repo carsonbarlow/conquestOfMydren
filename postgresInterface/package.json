@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "set NODE_ENV=test&&mocha test/unit/"
+    "test": "set NODE_ENV=test&&mocha test/unit/",
+    "integrationTest": "set NODE_ENV=integrationTest&&mocha test/integration/"
   },
   "keywords": [],
   "author": "Carson Barlow",
@@ -14,6 +15,7 @@
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
     "express": "^4.17.1",
+    "joi": "^17.5.0",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5"
@@ -22,6 +24,7 @@
     "chai": "^4.3.4",
     "mocha": "^9.1.3",
     "sinon": "^12.0.1",
-    "standard": "^16.0.4"
+    "standard": "^16.0.4",
+    "supertest": "^6.1.6"
   }
 }

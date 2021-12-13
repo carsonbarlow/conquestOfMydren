@@ -1218,25 +1218,25 @@ const testGame2 = {
       kingdomId: 'b9be29e8-0f47-444c-9e32-5e5eae9ce9da',
       statId: 1,
       position: 1,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '4a0f536f-a3ad-42a7-b69a-85eaca213b8a',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 8,
       position: 2,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '67eaefe9-df5f-42db-979c-1937411d7b78',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 7,
       position: 3,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
@@ -1245,16 +1245,16 @@ const testGame2 = {
       kingdomId: '281f5006-4f09-4d52-a665-2e32e7adeb11',
       statId: 6,
       position: 4,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: 'd0323030-3e49-4cbe-8fba-7be3a44d23db',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 9,
       position: 5,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
@@ -1263,70 +1263,70 @@ const testGame2 = {
       kingdomId: 'cd18b634-c9a0-49a2-8d51-e0d8c37355a8',
       statId: 2,
       position: 6,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '3b59e9b9-a3f2-430c-9c7d-4fa59f412cdb',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 7,
       position: 7,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '2ec2f676-7e40-4f5d-8a17-3a755070439c',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 8,
       position: 8,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '3945bbc7-978b-4718-975e-24c5861d147b',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 9,
       position: 9,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: 'dcfb760a-851e-4fc4-8ae7-8f36cc4e34e7',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 10,
       position: 10,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '749a71db-8e45-4d8e-b799-d018067d2d5e',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 9,
       position: 11,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '7f68a879-b9c7-4b6f-9d99-189b13569795',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 8,
       position: 12,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '21ebfefb-2b88-411e-9c47-22946ceef7a1',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 7,
       position: 13,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
@@ -1335,16 +1335,16 @@ const testGame2 = {
       kingdomId: 'b180212d-0eea-4194-b65f-53ccb28290d1',
       statId: 5,
       position: 14,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '32fc9490-0051-4538-9d20-a7e3efc5f16c',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 9,
       position: 15,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
@@ -1353,25 +1353,25 @@ const testGame2 = {
       kingdomId: '595e4d57-465d-4660-9dff-85ba6d95b468',
       statId: 3,
       position: 16,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: 'cc181e2e-a587-44ea-acaa-8d8d71084108',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 7,
       position: 17,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
       id: '455e86e7-6514-418a-a65e-aa7ea7f1995d',
       gameId: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-      kingdomId: 'null',
+      kingdomId: null,
       statId: 8,
       position: 18,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     },
     {
@@ -1380,7 +1380,7 @@ const testGame2 = {
       kingdomId: '47f753ac-4e67-4ac7-9c8f-6189a68076b1',
       statId: 4,
       position: 19,
-      armyId: 'null',
+      armyId: null,
       buildings: null
     }
   ],
@@ -1499,25 +1499,25 @@ const testTerritoriesData1 = [
     kingdom_id: 'b9be29e8-0f47-444c-9e32-5e5eae9ce9da',
     stat_id: 1,
     position: 1,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '4a0f536f-a3ad-42a7-b69a-85eaca213b8a',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 8,
     position: 2,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '67eaefe9-df5f-42db-979c-1937411d7b78',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 7,
     position: 3,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
@@ -1526,16 +1526,16 @@ const testTerritoriesData1 = [
     kingdom_id: '281f5006-4f09-4d52-a665-2e32e7adeb11',
     stat_id: 6,
     position: 4,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: 'd0323030-3e49-4cbe-8fba-7be3a44d23db',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 9,
     position: 5,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
@@ -1544,70 +1544,70 @@ const testTerritoriesData1 = [
     kingdom_id: 'cd18b634-c9a0-49a2-8d51-e0d8c37355a8',
     stat_id: 2,
     position: 6,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '3b59e9b9-a3f2-430c-9c7d-4fa59f412cdb',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 7,
     position: 7,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '2ec2f676-7e40-4f5d-8a17-3a755070439c',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 8,
     position: 8,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '3945bbc7-978b-4718-975e-24c5861d147b',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 9,
     position: 9,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: 'dcfb760a-851e-4fc4-8ae7-8f36cc4e34e7',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 10,
     position: 10,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '749a71db-8e45-4d8e-b799-d018067d2d5e',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 9,
     position: 11,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '7f68a879-b9c7-4b6f-9d99-189b13569795',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 8,
     position: 12,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '21ebfefb-2b88-411e-9c47-22946ceef7a1',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 7,
     position: 13,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
@@ -1616,16 +1616,16 @@ const testTerritoriesData1 = [
     kingdom_id: 'b180212d-0eea-4194-b65f-53ccb28290d1',
     stat_id: 5,
     position: 14,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '32fc9490-0051-4538-9d20-a7e3efc5f16c',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 9,
     position: 15,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
@@ -1634,25 +1634,25 @@ const testTerritoriesData1 = [
     kingdom_id: '595e4d57-465d-4660-9dff-85ba6d95b468',
     stat_id: 3,
     position: 16,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: 'cc181e2e-a587-44ea-acaa-8d8d71084108',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 7,
     position: 17,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
     id: '455e86e7-6514-418a-a65e-aa7ea7f1995d',
     game_id: '73d80e8a-3905-43b1-9af1-67f3e5edc223',
-    kingdom_id: 'null',
+    kingdom_id: null,
     stat_id: 8,
     position: 18,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   },
   {
@@ -1661,10 +1661,11 @@ const testTerritoriesData1 = [
     kingdom_id: '47f753ac-4e67-4ac7-9c8f-6189a68076b1',
     stat_id: 4,
     position: 19,
-    army_id: 'null',
+    army_id: null,
     buildings: null
   }
 ]
+
 // console.log(uuid()); // Used to generate more test data.
 
 const testData = {

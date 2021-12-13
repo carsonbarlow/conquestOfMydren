@@ -141,8 +141,7 @@ describe('requestHandler', () => {
           id: 'testGameId',
           turnNumber: 1234,
           kingdoms: 'cammelCaseKingdoms',
-          territories: 'cammelCaseTerritories',
-          success: true
+          territories: 'cammelCaseTerritories'
         })
       })
     })

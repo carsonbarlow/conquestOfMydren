@@ -42,7 +42,6 @@ const getGame = async (req, res) => {
     response = await client.query(queries.selectTerritoriesWithGameId({ id }))
     returnData.territories = utilities.convertVariableNames.territoriesToCammelCase(response.rows)
     console.log(`Selected game: ${id}.`)
-    returnData.success = true
   } catch (error) {
     console.log(error)
     returnData.error = error

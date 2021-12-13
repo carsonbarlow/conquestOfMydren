@@ -2,6 +2,10 @@
 
 const { users, games, kingdoms, territories } = require('./test/test-data.js')
 
+const optionalUuid = (id) => {
+  return id ? `'${id}'` : null
+}
+
 //= =========== Query Compolations ============\\
 
 const resetUsersTable = `
@@ -58,7 +62,7 @@ const resetTerritoriesTable = `
     buildings text ARRAY,
     PRIMARY KEY (id)
     );
-    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.game_id}','${territory.kingdom_id}', ${territory.stat_ID}, ${territory.position}, ${territory.army_id}, ${territory.buildings})`).join(',')};`
+    INSERT INTO territories(id, game_id, kingdom_id, stat_ID, position, army_id, buildings) VALUES ${territories.map(territory => `('${territory.id}','${territory.game_id}',${optionalUuid(territory.kingdom_id)}, ${territory.stat_ID}, ${territory.position}, ${territory.army_id}, ${territory.buildings})`).join(',')};`
 
 const resetArmiesTable = `
     DROP TABLE IF EXISTS armies;
@@ -106,7 +110,7 @@ const resetDBTables = [resetUsersTable, resetGamesTable, resetKingdomsTable, res
 
 const kingdomMapId = kingdom => `'${kingdom.id}'`
 const kingdomMapFullRow = kingdom => `('${kingdom.id}','${kingdom.gameId}','${kingdom.userId}', ${kingdom.food}, ${kingdom.wood}, ${kingdom.stone}, ${kingdom.gold}, ${kingdom.workersTotal}, ${kingdom.workersReserve}, ${kingdom.soldersTotal}, ${kingdom.soldersReserve}, ${kingdom.foodProduction}, ${kingdom.woodProduction}, ${kingdom.stoneProduction}, ${kingdom.goldProduction})`
-const territoriesMapFullRow = territory => `('${territory.id}','${territory.gameId}','${territory.kingdomId}', ${territory.statId}, ${territory.position}, ${territory.armyId}, ${territory.buildings})`
+const territoriesMapFullRow = territory => `('${territory.id}','${territory.gameId}',${optionalUuid(territory.kingdomId)}, ${territory.statId}, ${territory.position}, ${optionalUuid(territory.armyId)}, ${territory.buildings})`
 const newGame = ({ id, kingdoms, territories, turnNumber }) => `
     INSERT INTO games(id, players, turn_number) VALUES ('${id}', array[${kingdoms.map(kingdomMapId)}], ${turnNumber});
     INSERT INTO kingdoms(id, game_id, user_id, food, wood, stone, gold, workers_total, workers_reserve, solders_total, solders_reserve, food_production, wood_production, stone_production, gold_production) VALUES ${kingdoms.map(kingdomMapFullRow).join(',')};
@@ -149,8 +153,8 @@ const updateKingdoms = kingdoms => {
 const updateTerritories = territories => {
   return territories.map(territory => `
         UPDATE territories
-        SET kingdom_id = '${territory.kingdomId}',
-        army_id = '${territory.armyId}',
+        SET kingdom_id = ${optionalUuid(territory.kingdomId)},
+        army_id = ${optionalUuid(territory.armyId)},
         buildings = ${territory.buildings}
         WHERE id = '${territory.id}';
     `).join('')

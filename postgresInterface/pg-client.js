@@ -8,11 +8,7 @@ const client = new Client({
   port: 5432,
   user: 'postgres',
   password: 'unsecured',
-  database: 'conquest'
+  database: config.databaseName
 })
-
-if (config.environment !== 'testing') {
-  client.connect()
-}
 
 module.exports = client
